@@ -1,24 +1,8 @@
 #!/bin/bash
 
 #This script helps in creating and pushing files in a github repository
-
-if [[ "${UID}" -ne 0 ]]
-then
-    echo 'Please run with sudo or root.' >&2
-    exit 1
-fi
-USERNAM=$(awk -F: 'NR==1 {print $1}' usrpswd.csv)
-PASS=$(awk -F: 'NR==2 {print $1}' usrpswd.csv)
-
-CURRENTDIR=${pwd}
-
 help() {
     echo "reset username password"
-}
-
-pushinstruct() {
-    echo "Usage: ${0} [repositoryName]" >&2
-    exit 1
 }
 
 firstinstruct() {
@@ -29,20 +13,23 @@ firstinstruct() {
     exit 1
 }
 
-
+# if [[ "${UID}" -ne 0 ]]
+# then
+#     echo 'Please run with sudo or root.' >&2
+#     exit 1
+# fi
 
 #Checking if username,password file exists or not
 if [[ ! -f "usrpswd.csv" ]]
 then
-    echo "" > "usrpswd"
+    echo "" > "usrpswd.csv"
     echo "First Time User? Lets jump in."    
     firstinstruct
 fi
 
-if [[ "${#}" -lt 1 ]]
-then
-    firstinstruct
-fi
+USERNAM=$(awk -F: 'NR==1 {print $1}' usrpswd.csv)
+PASS=$(awk -F: 'NR==2 {print $1}' usrpswd.csv)
+
 
 if [[ "${#}" -eq 2 ]]
 then
@@ -57,9 +44,9 @@ then
     else
         echo "Username and password successfully stored for further usage."
         echo "Congratulations! You are good to go."
-        pushinstruct
+        # pushinstruct
     fi
-elif [[ "${#}" -eq 1 ]]
+elif [[ "${#}" -eq 0 ]]
 then
     echo "Give name to your remote repository:"
     read REPONAME
@@ -81,9 +68,6 @@ then
         git commit -m 'first commit, repo created.'
     fi
 
-    # USERNAM=$(awk -F: 'NR==1 {print $1}' usrpswd.csv)
-    # PASS=$(awk -F: 'NR==2 {print $1}' usrpswd.csv)
-
     curl -H "Authorization: token $PASS" https://api.github.com/user/repos -d "{\"name\":\"$REPONAME\"}"
 
     git add .
@@ -97,15 +81,11 @@ then
     if [[ ${?} -eq 0 ]]
     then
     echo "Done. Go to https://github.com/$USERNAM/$REPO_NAME to see." 
-    echo " *** You're now in your project root. ***"
+    echo "--- You're now in your project root. ---"
     fi
 else
     firstinstruct
 fi
 
-
-
-# echo "${USRN}"
-# echo "${PASS}"
 
 exit 0
