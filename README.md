@@ -16,6 +16,7 @@ Run the script and you will get to know how to dig deep. Use your access token a
 
 ```bash
 cd GScript-The-Github-Automation-Tool
+chmod 755 main.sh
 ./main.sh
 ```
 
