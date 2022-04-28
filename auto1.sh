@@ -2,11 +2,13 @@
 
 #This script helps in creating and pushing files in a github repository
 
-# if [[ "${UID}" -ne 0 ]]
-# then
-#     echo 'Please run with sudo or root.' >&2
-#     exit 1
-# fi
+if [[ "${UID}" -ne 0 ]]
+then
+    echo 'Please run with sudo or root.' >&2
+    exit 1
+fi
+USERNAM=$(awk -F: 'NR==1 {print $1}' usrpswd.csv)
+PASS=$(awk -F: 'NR==2 {print $1}' usrpswd.csv)
 
 CURRENTDIR=${pwd}
 
@@ -30,7 +32,7 @@ firstinstruct() {
 
 
 #Checking if username,password file exists or not
-if [[ ! -f "usrpswd" ]]
+if [[ ! -f "usrpswd.csv" ]]
 then
     echo "" > "usrpswd"
     echo "First Time User? Lets jump in."    
@@ -46,8 +48,8 @@ if [[ "${#}" -eq 2 ]]
 then
     USRN=${1}
     PASS=${2}
-    echo "${USRN}" > "usrpswd"
-    echo "${PASS}" >> "usrpswd"
+    echo "${USRN}" > "usrpswd.csv"
+    echo "${PASS}" >> "usrpswd.csv"
     if [[ "${?}" -ne 0 ]]
     then
         echo "Username and Password was not stored."
@@ -79,16 +81,24 @@ then
         git commit -m 'first commit, repo created.'
     fi
 
-    USERNAME=$(head -n 1 "usrpswd")
+    # USERNAM=$(awk -F: 'NR==1 {print $1}' usrpswd.csv)
+    # PASS=$(awk -F: 'NR==2 {print $1}' usrpswd.csv)
 
-    curl -H "Authorization: token $PASS" https://api.github.com/user/repos -d "{"name":"${REPONAME}"}"
+    curl -H "Authorization: token $PASS" https://api.github.com/user/repos -d "{\"name\":\"$REPONAME\"}"
 
-    git remote add origin https://github.com/${USERNAME}/${REPONAME}.git
+    git add .
+
+    git commit -m "initial commit"
+
+    git remote add origin https://github.com/${USERNAM}/${REPONAME}.git
     git push --set-upstream origin master
     cd "$PROJECT_PATH"
 
-    echo "Done. Go to https://github.com/$USERNAME/$REPO_NAME to see." 
+    if [[ ${?} -eq 0 ]]
+    then
+    echo "Done. Go to https://github.com/$USERNAM/$REPO_NAME to see." 
     echo " *** You're now in your project root. ***"
+    fi
 else
     firstinstruct
 fi
