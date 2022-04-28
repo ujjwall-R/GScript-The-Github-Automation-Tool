@@ -12,7 +12,7 @@ git clone https://github.com/mySpaceHere123/GScript-The-Github-Automation-Tool.g
 
 ## Usage
 
-Run the script and you will get to know how to dig deep.
+Run the script and you will get to know how to dig deep. Use your access token as your password. Just generate and supply once.
 
 ```bash
 cd GScript-The-Github-Automation-Tool
