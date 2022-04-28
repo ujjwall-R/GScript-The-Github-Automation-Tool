@@ -4,7 +4,7 @@ GScript-The-Github-Automation-Tool is a Shell script created to help git/github 
 
 ## Installation
 
-Download the main.sh file or instead clone the directory. Make sure git is already installed in your linux machine if you are a new Github user and here to try GScript.
+Download the main.sh file or instead clone the repository. Make sure git is already installed in your linux machine if you are a new Github user and here to try GScript.
 
 ```bash
 git clone https://github.com/mySpaceHere123/GScript-The-Github-Automation-Tool.git
