@@ -74,8 +74,11 @@ then
 
     git commit -m "initial commit"
 
-    git remote add origin https://github.com/${USERNAM}/${REPONAME}.git
-    git push --set-upstream origin master
+    # git remote add origin https://github.com/${USERNAM}/${REPONAME}.git
+    # git push --set-upstream origin master
+
+    git push "https://${PASS}@github.com/${USERNAM}/${REPONAME}.git"
+
     cd "$PROJECT_PATH"
 
     if [[ ${?} -eq 0 ]]
