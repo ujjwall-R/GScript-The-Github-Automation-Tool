@@ -48,6 +48,10 @@ then
     fi
 elif [[ "${#}" -eq 0 ]]
 then
+    if [ -z "$USERNAM" ]
+    then
+      firstinstruct
+    fi
     echo "Give name to your remote repository:"
     read REPONAME
     echo "Repo description: "
@@ -83,7 +87,7 @@ then
 
     if [[ ${?} -eq 0 ]]
     then
-    echo "Done. Go to https://github.com/$USERNAM/$REPO_NAME to see." 
+    echo "Done. Go to https://github.com/$USERNAM/$REPONAME to see." 
     echo "--- You're now in your project root. ---"
     fi
 else
