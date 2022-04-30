@@ -68,7 +68,7 @@ then
 
     git add .
 
-    git commit -m "This commit has been performed using GScript-https://github.com/mySpaceHere123/GScript-The-Github-Automation-Tool.git"
+    git commit -m "This commit has been performed using GScript-https://github.com/ujjwall-R/GScript-The-Github-Automation-Tool.git"
 
     git remote add origin "https://${PASS}@github.com/${USERNAM}/${REPONAME}.git"
     git push --set-upstream origin master
