@@ -13,13 +13,6 @@ firstinstruct() {
     exit 1
 }
 
-# if [[ "${UID}" -ne 0 ]]
-# then
-#     echo 'Please run with sudo or root.' >&2
-#     exit 1
-# fi
-
-#Checking if username,password file exists or not
 if [[ ! -f "usrpswd.csv" ]]
 then
     echo "" > "usrpswd.csv"
@@ -44,7 +37,6 @@ then
     else
         echo "Username and password successfully stored for further usage."
         echo "Congratulations! You are good to go."
-        # pushinstruct
     fi
 elif [[ "${#}" -eq 0 ]]
 then
@@ -76,12 +68,11 @@ then
 
     git add .
 
-    git commit -m "initial commit"
+    git commit -m "This commit has been performed using GScript-https://github.com/mySpaceHere123/GScript-The-Github-Automation-Tool.git"
 
     git remote add origin "https://${PASS}@github.com/${USERNAM}/${REPONAME}.git"
     git push --set-upstream origin master
 
-    # git push "https://${PASS}@github.com/${USERNAM}/${REPONAME}.git"
 
     cd "$PROJECT_PATH"
 

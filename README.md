@@ -1,6 +1,6 @@
 # GScript-The-Github-Automation-Tool
 
-GScript-The-Github-Automation-Tool is a Shell script created to help git/github users in creating and pushing files in a new github repository. One can easily overcome the pain due to the recent github update regarding access token using GScript. Do not repeat your commands (DRY), just run the script.
+GScript-The-Github-Automation-Tool is a Shell script created to help git/github users in creating and pushing files in a new github repository. One can easily overcome the pain due to the recent github update regarding access token using GScript. Do not repeat your commands (DRY), simply run the script.
 
 ## Installation
 
